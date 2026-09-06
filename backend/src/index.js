@@ -1,6 +1,7 @@
 //const express = require('express');
 import express from "express";
 import cors from "cors"; // cors(cross-origin resource sharing) is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the resource originated.
+import job from "./lib/cron.js";
 
 import dotenv from "dotenv/config";
 
@@ -54,3 +55,4 @@ app.listen(PORT, () => {
     job.start();
   }
 });
+

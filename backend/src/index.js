@@ -2,7 +2,6 @@
 import express from "express";
 import cors from "cors"; // cors(cross-origin resource sharing) is a mechanism that allows restricted resources on a web page to be requested from another domain outside the domain from which the resource originated.
 
-
 import dotenv from "dotenv/config";
 
 import fs from "fs";
@@ -16,6 +15,7 @@ import job from "./lib/cron.js";
 
 import clerkWebhook from "./webhooks/clerk.webhook.js";
 import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
 
 import dns from "dns";
 dns.setServers(["8.8.8.8"]);
@@ -44,7 +44,8 @@ app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
 });
 
-app.use("/api/auth",authRoutes)
+app.use("/api/auth",authRoutes);
+app.use("/api/messages",messageRoutes);
 
 //if the public directory does not exist, serve static files from the public directory
 //this is for production build, when the frontend is built and served from the backend

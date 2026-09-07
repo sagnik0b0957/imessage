@@ -13,7 +13,9 @@ import { clerkMiddleware } from "@clerk/express";
 import User from "./models/user.model.js";
 import { connectDB } from "./lib/db.js";
 import job from "./lib/cron.js";
+
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import authRoutes from "./routes/auth.route.js";
 
 import dns from "dns";
 dns.setServers(["8.8.8.8"]);
@@ -41,6 +43,8 @@ app.use(clerkMiddleware());
 app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
 });
+
+app.use("/api/auth",authRoutes)
 
 //if the public directory does not exist, serve static files from the public directory
 //this is for production build, when the frontend is built and served from the backend
